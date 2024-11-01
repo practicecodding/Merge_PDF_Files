@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:text="Marge PDF Files"
         android:layout_margin="20dp"
+        android:layout_gravity="bottom"
         />
 
 </LinearLayout>

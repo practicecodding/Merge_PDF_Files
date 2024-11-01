@@ -1,11 +1,13 @@
 package com.hamidul.mergepdffiles;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -18,6 +20,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         btnSelectPdf = findViewById(R.id.btnSelectPdf);
         btnMargePDF = findViewById(R.id.btnMargePDF);
-
 
         btnSelectPdf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
 
-                    String fileName = System.currentTimeMillis() + "merged.pdf";
+                    String fileName = new SimpleDateFormat("HH:mm:ss dd-MMMM-yyy").format(new Date()) + ".pdf";
 
                     File mergePdfFile = new File(MainActivity.this.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), fileName);
 
