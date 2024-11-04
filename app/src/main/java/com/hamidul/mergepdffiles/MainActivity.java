@@ -5,13 +5,14 @@ import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfCopy;
@@ -80,8 +81,13 @@ public class MainActivity extends AppCompatActivity {
 
                     document.close();
                     fileOutputStream.close();
-
                     setToast("PDF Files merge successfully");
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    Uri fileUri = FileProvider.getUriForFile(MainActivity.this, getPackageName() + ".provider", mergePdfFile);
+                    intent.setDataAndType(fileUri,"application/pdf");
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    startActivity(intent);
                     
                 } catch (Exception e) {
                     e.printStackTrace();
